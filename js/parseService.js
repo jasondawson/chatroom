@@ -24,10 +24,12 @@ app.service('parseService', function($http){
 
   //getData method here
    this.getData = function() {
-    return $http({
-      method: 'GET',
-      url: 'https://api.parse.com/1/classes/chat?order=-createdAt'
-    })
- };
+    return $http.get('https://api.parse.com/1/classes/chat?order=-createdAt')
+      .success(function(data) {
+        return data.results;
+      }).error(function(err) {
+        console.error(err);
+      })
+    };
  
 });
